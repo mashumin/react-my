@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./react.min.js"></script>
+    <script src="./react-dom.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    class Hello extends React.Component {
+        constructor(){
+            super();
+        }
+        render() {
+            return <div>
+                {this.props.children.map(function(a){
+                    return <li>{a}</li>
+                })}
+            </div>
+        }
+    }
+    ReactDOM.render(<Hello><span>span</span><em>em</em></Hello>,document.getElementById("example"));
+</script>
+</body>
+</html>

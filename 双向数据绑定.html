@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./react.min.js"></script>
+    <script src="./react-dom.min.js"></script>
+    <script src="babel.js"></script>
+    <script src="remarkable.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<!--改变时间-->
+<script type="text/babel">
+    class Work extends React.Component {
+        constructor(props) {
+            super(props);
+//            this.handleChange = this.handleChange.bind(this);
+            this.state = {value: ''};
+        }
+
+        change() {
+            this.setState({value: this.refs.textarea.value});
+        }
+
+        html() {
+            var md = new Remarkable();
+            return { __html: md.render(this.state.value) };
+        }
+
+        render() {
+            return (
+                    <div className="MarkdownEditor">
+                        <h3>Input</h3>
+                        <textarea
+                                onChange={this.change.bind(this)}
+                                ref="textarea"
+                                defaultValue={this.state.value} />
+                        <h3>Output</h3>
+                        <div
+                                className="content"
+                                dangerouslySetInnerHTML={this.html()}
+                        />
+                    </div>
+            );
+        }
+    }
+
+    ReactDOM.render(<Work />, example);
+</script>
+</body>
+</html>
