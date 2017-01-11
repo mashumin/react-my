@@ -15,12 +15,12 @@
     class Work extends React.Component {
         constructor(props) {
             super(props);
-//            this.handleChange = this.handleChange.bind(this);
             this.state = {value: ''};
         }
 
         change() {
-            this.setState({value: this.refs.textarea.value});
+            var val=document.querySelector("textarea").value;
+            this.setState({value: val});
         }
 
         html() {
@@ -30,15 +30,11 @@
 
         render() {
             return (
-                    <div className="MarkdownEditor">
+                    <div>
                         <h3>Input</h3>
-                        <textarea
-                                onChange={this.change.bind(this)}
-                                ref="textarea"
-                                defaultValue={this.state.value} />
+                        <textarea onChange={this.change.bind(this)}>{this.state.value}</textarea>
                         <h3>Output</h3>
                         <div
-                                className="content"
                                 dangerouslySetInnerHTML={this.html()}
                         />
                     </div>
